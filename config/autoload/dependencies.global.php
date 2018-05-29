@@ -6,6 +6,8 @@ use Zend\Expressive\Delegate;
 use Zend\Expressive\Helper;
 use Zend\Expressive\Middleware;
 use CodeEdu\FixtureFactory;
+use CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository\CustomerRepositoryFactory;
+use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
 
 return [
     // Provides application-wide services.
@@ -38,6 +40,7 @@ return [
             Middleware\ErrorResponseGenerator::class         => Container\ErrorResponseGeneratorFactory::class,
             Middleware\NotFoundHandler::class                => Container\NotFoundHandlerFactory::class,
             'doctrine:fixtures_cmd:load' => FixtureFactory::class,
+            CustomerRepositoryInterface::class => CustomerRepositoryFactory::class,
         ],
     ],
 ];
