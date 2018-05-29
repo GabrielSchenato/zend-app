@@ -20,7 +20,9 @@ class CustomerRepository extends EntityRepository implements CustomerRepositoryI
 
     public function create($entity)
     {
-        
+        $this->getEntityManager()->persist($entity);
+        $this->getEntityManager()->flush();
+        return $entity;
     }
 
     public function remove($entity)
