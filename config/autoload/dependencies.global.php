@@ -1,13 +1,18 @@
 <?php
 
+use Aura\Session\Session;
+use CodeEdu\FixtureFactory;
+use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
+use CodeEmailMKT\Domain\Service\FlashMessageInterface;
+use CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository\CustomerRepositoryFactory;
+use CodeEmailMKT\Infrastructure\Service\Factory\FlashMessageFactory;
+use DaMess\Factory\AuraSessionFactory;
 use Zend\Expressive\Application;
 use Zend\Expressive\Container;
 use Zend\Expressive\Delegate;
 use Zend\Expressive\Helper;
 use Zend\Expressive\Middleware;
-use CodeEdu\FixtureFactory;
-use CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository\CustomerRepositoryFactory;
-use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
+use Zend\Stratigility\Middleware\ErrorHandler;
 
 return [
     // Provides application-wide services.
@@ -36,12 +41,13 @@ return [
             Helper\UrlHelper::class           => Helper\UrlHelperFactory::class,
             Helper\UrlHelperMiddleware::class => Helper\UrlHelperMiddlewareFactory::class,
 
-            Zend\Stratigility\Middleware\ErrorHandler::class => Container\ErrorHandlerFactory::class,
+            ErrorHandler::class => Container\ErrorHandlerFactory::class,
             Middleware\ErrorResponseGenerator::class         => Container\ErrorResponseGeneratorFactory::class,
             Middleware\NotFoundHandler::class                => Container\NotFoundHandlerFactory::class,
             'doctrine:fixtures_cmd:load' => FixtureFactory::class,
             CustomerRepositoryInterface::class => CustomerRepositoryFactory::class,
-            \Aura\Session\Session::class => \DaMess\Factory\AuraSessionFactory::class,
+            Session::class => AuraSessionFactory::class,
+            FlashMessageInterface::class => FlashMessageFactory::class,
         ],
     ],
 ];
