@@ -41,6 +41,7 @@ return [
             Middleware\NotFoundHandler::class                => Container\NotFoundHandlerFactory::class,
             'doctrine:fixtures_cmd:load' => FixtureFactory::class,
             CustomerRepositoryInterface::class => CustomerRepositoryFactory::class,
+            \Aura\Session\Session::class => \DaMess\Factory\AuraSessionFactory::class,
         ],
     ],
 ];
