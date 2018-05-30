@@ -1,8 +1,9 @@
 <?php
 
-namespace CodeEmailMKT\Application\Action\Customer;
+namespace CodeEmailMKT\Application\Action\Customer\Factory;
 
 use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
+use CodeEmailMKT\Application\Action\Customer\CustomerCreatePageAction;
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 

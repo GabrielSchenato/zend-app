@@ -3,9 +3,9 @@
 namespace CodeEmailMKT;
 
 use CodeEmailMKT\Application\Action\Customer\CustomerCreatePageAction;
-use CodeEmailMKT\Application\Action\Customer\CustomerCreatePageFactory;
+use CodeEmailMKT\Application\Action\Customer\Factory\CustomerCreatePageFactory;
 use CodeEmailMKT\Application\Action\Customer\CustomerListPageAction;
-use CodeEmailMKT\Application\Action\Customer\CustomerListPageFactory;
+use CodeEmailMKT\Application\Action\Customer\Factory\CustomerListPageFactory;
 
 /**
  * The configuration provider for the App module
