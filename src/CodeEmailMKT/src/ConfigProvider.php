@@ -2,6 +2,8 @@
 
 namespace CodeEmailMKT;
 
+use CodeEmailMKT\Application\Action\Customer\CustomerCreatePageAction;
+use CodeEmailMKT\Application\Action\Customer\CustomerCreatePageFactory;
 use CodeEmailMKT\Application\Action\Customer\CustomerListPageAction;
 use CodeEmailMKT\Application\Action\Customer\CustomerListPageFactory;
 
@@ -42,6 +44,7 @@ class ConfigProvider
             'factories'  => [
                 Action\HomePageAction::class => Application\Action\HomePageFactory::class,
                 CustomerListPageAction::class => CustomerListPageFactory::class,
+                CustomerCreatePageAction::class => CustomerCreatePageFactory::class,
             ],
         ];
     }

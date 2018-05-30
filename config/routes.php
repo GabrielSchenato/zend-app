@@ -30,4 +30,6 @@
 
 $app->get('/', CodeEmailMKT\Action\HomePageAction::class, 'home');
 $app->get('/api/ping', CodeEmailMKT\Action\PingAction::class, 'api.ping');
+
 $app->get('/admin/customers', CodeEmailMKT\Application\Action\Customer\CustomerListPageAction::class, 'list.customers');
+$app->route('/admin/customer/create', CodeEmailMKT\Application\Action\Customer\CustomerCreatePageAction::class, ['GET', 'POST',], 'customer.create');
