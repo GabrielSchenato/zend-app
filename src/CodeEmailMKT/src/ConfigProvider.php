@@ -2,6 +2,9 @@
 
 namespace CodeEmailMKT;
 
+use CodeEmailMKT\Application\Action\Customer\CustomerListPageAction;
+use CodeEmailMKT\Application\Action\Customer\CustomerListPageFactory;
+
 /**
  * The configuration provider for the App module
  *
@@ -38,6 +41,7 @@ class ConfigProvider
             ],
             'factories'  => [
                 Action\HomePageAction::class => Application\Action\HomePageFactory::class,
+                CustomerListPageAction::class => CustomerListPageFactory::class,
             ],
         ];
     }

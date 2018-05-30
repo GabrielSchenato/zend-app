@@ -3,7 +3,7 @@
 namespace CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository;
 
 use CodeEmailMKT\Domain\Entity\Customer;
-use DoctrineORMModule\Options\EntityManager;
+use Doctrine\ORM\EntityManager;
 use Psr\Container\ContainerInterface;
 /*
  * To change this license header, choose License Headers in Project Properties.
