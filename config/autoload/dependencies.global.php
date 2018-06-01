@@ -49,6 +49,7 @@ return [
             Session::class => AuraSessionFactory::class,
             FlashMessageInterface::class => FlashMessageFactory::class,
             CodeEmailMKT\Application\Middleware\BootstrapMiddleware::class => \CodeEmailMKT\Application\Middleware\BootstrapMiddlewareFactory::class,
+            CodeEmailMKT\Application\Middleware\TwigMiddleware::class => \CodeEmailMKT\Application\Middleware\TwigMiddlewareFactory::class,
         ],
     ],
 ];

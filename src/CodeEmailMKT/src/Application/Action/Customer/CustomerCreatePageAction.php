@@ -2,6 +2,7 @@
 
 namespace CodeEmailMKT\Application\Action\Customer;
 
+use CodeEmailMKT\Application\Form\CustomerForm;
 use CodeEmailMKT\Domain\Entity\Customer;
 use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -29,7 +30,7 @@ class CustomerCreatePageAction {
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
-        
+        $form = new CustomerForm();
         if($request->getMethod() == "POST"){
             $data = $request->getParsedBody();
             $entity = new Customer();
@@ -44,7 +45,9 @@ class CustomerCreatePageAction {
             return new RedirectResponse($uri);
         }
         
-        return new HtmlResponse($this->template->render("app::customer/create"));
+        return new HtmlResponse($this->template->render("app::customer/create", [
+            'form' => $form
+        ]));
     }
 
 }
