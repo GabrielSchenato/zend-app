@@ -3,9 +3,13 @@
 namespace CodeEmailMKT;
 
 use CodeEmailMKT\Application\Action\Customer\CustomerCreatePageAction;
-use CodeEmailMKT\Application\Action\Customer\Factory\CustomerCreatePageFactory;
 use CodeEmailMKT\Application\Action\Customer\CustomerListPageAction;
+use CodeEmailMKT\Application\Action\Customer\CustomerUpdatePageAction;
+use CodeEmailMKT\Application\Action\Customer\Factory\CustomerCreatePageFactory;
 use CodeEmailMKT\Application\Action\Customer\Factory\CustomerListPageFactory;
+use CodeEmailMKT\Application\Action\Customer\Factory\CustomerUpdatePageFactory;
+use CodeEmailMKT\Application\Action\HomePageFactory;
+use CodeEmailMKT\Application\Action\PingAction;
 
 /**
  * The configuration provider for the App module
@@ -39,12 +43,13 @@ class ConfigProvider
     {
         return [
             'invokables' => [
-                Action\PingAction::class => Application\Action\PingAction::class,
+                Action\PingAction::class => PingAction::class,
             ],
             'factories'  => [
-                Action\HomePageAction::class => Application\Action\HomePageFactory::class,
+                Action\HomePageAction::class => HomePageFactory::class,
                 CustomerListPageAction::class => CustomerListPageFactory::class,
                 CustomerCreatePageAction::class => CustomerCreatePageFactory::class,
+                CustomerUpdatePageAction::class => CustomerUpdatePageFactory::class,
             ],
         ];
     }

@@ -1,4 +1,9 @@
 <?php
+
+use CodeEmailMKT\Application\Action\Customer\CustomerCreatePageAction;
+use CodeEmailMKT\Application\Action\Customer\CustomerListPageAction;
+use CodeEmailMKT\Application\Action\Customer\CustomerUpdatePageAction;
+use Zend\Expressive\Application;
 /**
  * Setup routes with a single request method:
  *
@@ -26,10 +31,13 @@
  * );
  */
 
-/** @var \Zend\Expressive\Application $app */
+/** @var Application $app */
 
 $app->get('/', CodeEmailMKT\Action\HomePageAction::class, 'home');
 $app->get('/api/ping', CodeEmailMKT\Action\PingAction::class, 'api.ping');
 
-$app->get('/admin/customers', CodeEmailMKT\Application\Action\Customer\CustomerListPageAction::class, 'list.customers');
-$app->route('/admin/customer/create', CodeEmailMKT\Application\Action\Customer\CustomerCreatePageAction::class, ['GET', 'POST',], 'customer.create');
+$app->get('/admin/customers', CustomerListPageAction::class, 'list.customers');
+$app->route('/admin/customer/create', CustomerCreatePageAction::class, ['GET', 'POST',], 'customer.create');
+$app->route('/admin/customer/update/{id}', CustomerUpdatePageAction::class, ['GET', 'POST',], 'customer.update')->setOptions([
+        'tokens' => ['id' => '\d+'],
+    ]);
