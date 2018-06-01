@@ -54,7 +54,7 @@ class FlashMessage implements FlashMessageInterface {
         return $this;
     }
 
-    public function setNamespace($name = __NAMESPACE___)
+    public function setNamespace($name = __NAMESPACE__)
     {
         $this->segment = $this->session->getSegment($name);
         return $this;

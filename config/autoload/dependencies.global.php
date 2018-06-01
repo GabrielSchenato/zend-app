@@ -48,6 +48,7 @@ return [
             CustomerRepositoryInterface::class => CustomerRepositoryFactory::class,
             Session::class => AuraSessionFactory::class,
             FlashMessageInterface::class => FlashMessageFactory::class,
+            CodeEmailMKT\Application\Middleware\BootstrapMiddleware::class => \CodeEmailMKT\Application\Middleware\BootstrapMiddlewareFactory::class,
         ],
     ],
 ];

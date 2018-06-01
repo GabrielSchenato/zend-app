@@ -2,9 +2,10 @@
 
 namespace CodeEmailMKT\Application\Action\Customer\Factory;
 
-use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
 use CodeEmailMKT\Application\Action\Customer\CustomerCreatePageAction;
+use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
 use Interop\Container\ContainerInterface;
+use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 class CustomerCreatePageFactory {
@@ -13,8 +14,8 @@ class CustomerCreatePageFactory {
     {
         $template = $container->get(TemplateRendererInterface::class);
         $repository = $container->get(CustomerRepositoryInterface::class);
-        
-        return new CustomerCreatePageAction($repository, $template);
+        $router = $container->get(RouterInterface::class);
+        return new CustomerCreatePageAction($repository, $template, $router);
     }
 
 }
