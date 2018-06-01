@@ -11,6 +11,7 @@ $cacheConfig = [
 ];
 
 $aggregator = new ConfigAggregator([
+    \Zend\I18n\ConfigProvider::class,
     Zend\Expressive\ConfigProvider::class,
     Zend\Expressive\Router\ConfigProvider::class,
     // Include cache configuration
