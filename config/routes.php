@@ -1,6 +1,7 @@
 <?php
 
 use CodeEmailMKT\Application\Action\Customer\CustomerCreatePageAction;
+use CodeEmailMKT\Application\Action\Customer\CustomerDeletePageAction;
 use CodeEmailMKT\Application\Action\Customer\CustomerListPageAction;
 use CodeEmailMKT\Application\Action\Customer\CustomerUpdatePageAction;
 use Zend\Expressive\Application;
@@ -38,6 +39,9 @@ $app->get('/api/ping', CodeEmailMKT\Action\PingAction::class, 'api.ping');
 
 $app->get('/admin/customers', CustomerListPageAction::class, 'list.customers');
 $app->route('/admin/customer/create', CustomerCreatePageAction::class, ['GET', 'POST',], 'customer.create');
-$app->route('/admin/customer/update/{id}', CustomerUpdatePageAction::class, ['GET', 'POST',], 'customer.update')->setOptions([
+$app->route('/admin/customer/update/{id}', CustomerUpdatePageAction::class, ['GET', 'PUT',], 'customer.update')->setOptions([
+        'tokens' => ['id' => '\d+'],
+    ]);
+$app->route('/admin/customer/delete/{id}', CustomerDeletePageAction::class, ['GET', 'DELETE',], 'customer.delete')->setOptions([
         'tokens' => ['id' => '\d+'],
     ]);

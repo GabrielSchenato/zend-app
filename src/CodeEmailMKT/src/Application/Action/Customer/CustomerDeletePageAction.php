@@ -10,7 +10,7 @@ use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template;
 
-class CustomerUpdatePageAction {
+class CustomerDeletePageAction {
 
     /**
      * @var RouterInterface
@@ -31,20 +31,18 @@ class CustomerUpdatePageAction {
         $id = $request->getAttribute('id');
         $entity = $this->repository->find($id);
         
-        if($request->getMethod() == "PUT"){
+        if($request->getMethod() == "DELETE"){
             $data = $request->getParsedBody();
-            $entity->setName($data['name']);
-            $entity->setEmail($data['email']);
-            $this->repository->update($entity);
+            $this->repository->remove($entity);
             $flash = $request->getAttribute('flash');
-            $flash->setMessage('success', 'Contato editado com sucesso');
+            $flash->setMessage('success', 'Contato removido com sucesso');
             
             $uri = $this->router->generateUri('list.customers');
                         
             return new RedirectResponse($uri);
         }
         
-        return new HtmlResponse($this->template->render("app::customer/update",[
+        return new HtmlResponse($this->template->render("app::customer/delete",[
             'customer' => $entity
         ]));
     }

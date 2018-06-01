@@ -3,9 +3,11 @@
 namespace CodeEmailMKT;
 
 use CodeEmailMKT\Application\Action\Customer\CustomerCreatePageAction;
+use CodeEmailMKT\Application\Action\Customer\CustomerDeletePageAction;
 use CodeEmailMKT\Application\Action\Customer\CustomerListPageAction;
 use CodeEmailMKT\Application\Action\Customer\CustomerUpdatePageAction;
 use CodeEmailMKT\Application\Action\Customer\Factory\CustomerCreatePageFactory;
+use CodeEmailMKT\Application\Action\Customer\Factory\CustomerDeletePageFactory;
 use CodeEmailMKT\Application\Action\Customer\Factory\CustomerListPageFactory;
 use CodeEmailMKT\Application\Action\Customer\Factory\CustomerUpdatePageFactory;
 use CodeEmailMKT\Application\Action\HomePageFactory;
@@ -50,6 +52,7 @@ class ConfigProvider
                 CustomerListPageAction::class => CustomerListPageFactory::class,
                 CustomerCreatePageAction::class => CustomerCreatePageFactory::class,
                 CustomerUpdatePageAction::class => CustomerUpdatePageFactory::class,
+                CustomerDeletePageAction::class => CustomerDeletePageFactory::class,
             ],
         ];
     }

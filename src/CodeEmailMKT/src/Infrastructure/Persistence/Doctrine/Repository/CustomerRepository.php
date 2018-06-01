@@ -28,7 +28,8 @@ class CustomerRepository extends EntityRepository implements CustomerRepositoryI
 
     public function remove($entity)
     {
-        
+        $this->getEntityManager()->remove($entity);
+        $this->getEntityManager()->flush();
     }
 
     public function update($entity)
