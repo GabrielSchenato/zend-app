@@ -15,32 +15,37 @@ use Zend\Expressive\Template;
 class CustomerUpdatePageAction {
 
     /**
+     * @var CustomerForm
+     */
+    private $form;
+
+    /**
      * @var RouterInterface
      */
     private $router;
     private $template;
     private $repository;
 
-    public function __construct(CustomerRepositoryInterface $repository, Template\TemplateRendererInterface $template, RouterInterface $router)
+    public function __construct(CustomerRepositoryInterface $repository, Template\TemplateRendererInterface $template, RouterInterface $router, CustomerForm $form)
     {
         $this->template = $template;
         $this->repository = $repository;
         $this->router = $router;
+        $this->form = $form;
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
         $id = $request->getAttribute('id');
         $entity = $this->repository->find($id);
-        $form = new CustomerForm();
-        $form->add(new HttpMethodElement('PUT'));
-        $form->bind($entity);
+        $this->form->add(new HttpMethodElement('PUT'));
+        $this->form->bind($entity);
         if ($request->getMethod() == "PUT") {
             $flash = $request->getAttribute('flash');
             $dataRaw = $request->getParsedBody();
-            $form->setData($dataRaw);
-            if ($form->isValid()) {
-                $entity = $form->getData();
+            $this->form->setData($dataRaw);
+            if ($this->form->isValid()) {
+                $entity = $this->form->getData();
                 $this->repository->update($entity);
                 $flash->setMessage('success', 'Contato editado com sucesso');
                 $uri = $this->router->generateUri('list.customers');
@@ -48,7 +53,7 @@ class CustomerUpdatePageAction {
             }
         }
         return new HtmlResponse($this->template->render("app::customer/update",[
-            'form' => $form
+            'form' => $this->form
         ]));
     }
 

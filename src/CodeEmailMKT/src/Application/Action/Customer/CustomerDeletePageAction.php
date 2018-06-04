@@ -15,29 +15,33 @@ use Zend\Expressive\Template;
 class CustomerDeletePageAction {
 
     /**
+     * @var CustomerForm
+     */
+    private $form;
+
+    /**
      * @var RouterInterface
      */
     private $router;
     private $template;
     private $repository;
 
-    public function __construct(CustomerRepositoryInterface $repository, Template\TemplateRendererInterface $template, RouterInterface $router)
+    public function __construct(CustomerRepositoryInterface $repository, Template\TemplateRendererInterface $template, RouterInterface $router, CustomerForm $form)
     {
         $this->template = $template;
         $this->repository = $repository;
         $this->router = $router;
+        $this->form = $form;
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
         $id = $request->getAttribute('id');
         $entity = $this->repository->find($id);
-        $form = new CustomerForm();
-        $form->add(new HttpMethodElement('DELETE'));
-        $form->bind($entity);
+        $this->form->add(new HttpMethodElement('DELETE'));
+        $this->form->bind($entity);
         
         if($request->getMethod() == "DELETE"){
-            $data = $request->getParsedBody();
             $this->repository->remove($entity);
             $flash = $request->getAttribute('flash');
             $flash->setMessage('success', 'Contato removido com sucesso');
@@ -48,7 +52,7 @@ class CustomerDeletePageAction {
         }
         
         return new HtmlResponse($this->template->render("app::customer/delete",[
-            'form' => $form
+            'form' => $this->form
         ]));
     }
 

@@ -7,6 +7,7 @@ use Zend\Filter\StripTags;
 use Zend\InputFilter\InputFilter;
 use Zend\Validator\EmailAddress;
 use Zend\Validator\NotEmpty;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,8 +19,8 @@ use Zend\Validator\NotEmpty;
  *
  * @author gabriel
  */
-class CustomerInputFilter extends InputFilter
-{
+class CustomerInputFilter extends InputFilter {
+
     public function __construct()
     {
         $this->add([
@@ -30,7 +31,7 @@ class CustomerInputFilter extends InputFilter
                 ['name' => StripTags::class]
             ]
         ]);
-        
+
         $this->add([
             'name' => 'email',
             'required' => true,
@@ -40,19 +41,24 @@ class CustomerInputFilter extends InputFilter
             'validators' => [
                 [
                     'name' => NotEmpty::class,
+                    'break_chain_on_failure' => true,
                     'options' => [
                         'messages' => [
-                        NotEmpty::IS_EMPTY => "Este campo é requerido"
+                            NotEmpty::IS_EMPTY => "Este campo é requerido"
                         ]
                     ]
                 ],
                 [
                     'name' => EmailAddress::class,
                     'options' => [
-                    EmailAddress::INVALID => "Este e-mail não é válido"
+                        'messages' => [
+                            EmailAddress::INVALID => "Este e-mail não é válido",
+                            EmailAddress::INVALID_FORMAT => "Este e-mail não é válido"
+                        ]
                     ]
                 ]
             ]
         ]);
     }
+
 }

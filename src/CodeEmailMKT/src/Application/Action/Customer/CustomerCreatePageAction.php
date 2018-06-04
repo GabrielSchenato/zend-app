@@ -3,7 +3,6 @@
 namespace CodeEmailMKT\Application\Action\Customer;
 
 use CodeEmailMKT\Application\Form\CustomerForm;
-use CodeEmailMKT\Domain\Entity\Customer;
 use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -15,28 +14,33 @@ use Zend\Expressive\Template;
 class CustomerCreatePageAction {
 
     /**
+     * @var CustomerForm
+     */
+    private $form;
+
+    /**
      * @var RouterInterface
      */
     private $router;
     private $template;
     private $repository;
 
-    public function __construct(CustomerRepositoryInterface $repository, Template\TemplateRendererInterface $template, RouterInterface $router)
+    public function __construct(CustomerRepositoryInterface $repository, Template\TemplateRendererInterface $template, RouterInterface $router, CustomerForm $form)
     {
         $this->template = $template;
         $this->repository = $repository;
         $this->router = $router;
+        $this->form = $form;
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
-        $form = new CustomerForm();
         if($request->getMethod() == "POST"){
             $flash = $request->getAttribute('flash');
             $dataRaw = $request->getParsedBody();
-            $form->setData($dataRaw);
-            if ($form->isValid()) {
-                $entity = $form->getData();
+            $this->form->setData($dataRaw);
+            if ($this->form->isValid()) {
+                $entity = $this->form->getData();
                 $this->repository->create($entity);
                 $flash->setMessage('success', 'Contato cadastrado com sucesso');
                 $uri = $this->router->generateUri('list.customers');
@@ -45,7 +49,7 @@ class CustomerCreatePageAction {
         }
         
         return new HtmlResponse($this->template->render("app::customer/create", [
-            'form' => $form
+            'form' => $this->form
         ]));
     }
 
