@@ -11,6 +11,8 @@ use CodeEmailMKT\Application\Action\Customer\Factory\CustomerDeletePageFactory;
 use CodeEmailMKT\Application\Action\Customer\Factory\CustomerListPageFactory;
 use CodeEmailMKT\Application\Action\Customer\Factory\CustomerUpdatePageFactory;
 use CodeEmailMKT\Application\Action\HomePageFactory;
+use CodeEmailMKT\Application\Action\LoginPageAction;
+use CodeEmailMKT\Application\Action\LoginPageFactory;
 use CodeEmailMKT\Application\Action\PingAction;
 
 /**
@@ -49,6 +51,7 @@ class ConfigProvider
             ],
             'factories'  => [
                 Action\HomePageAction::class => HomePageFactory::class,
+                LoginPageAction::class => LoginPageFactory::class,
                 CustomerListPageAction::class => CustomerListPageFactory::class,
                 CustomerCreatePageAction::class => CustomerCreatePageFactory::class,
                 CustomerUpdatePageAction::class => CustomerUpdatePageFactory::class,
