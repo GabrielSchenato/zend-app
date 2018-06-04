@@ -31,8 +31,15 @@ class LoginPageAction {
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
+        if ($request->getMethod() == 'POST') {
+            $data = $request->getParsedBody();
+            $this->form->setData($data);
+            if ($this->form->isValid()) {
+                
+            }
+        }
         return new HtmlResponse($this->template->render("app::login", [
-            'form' => $this->form
+                    'form' => $this->form
         ]));
     }
 

@@ -1,0 +1,17 @@
+#CodeEmailMKT.Domain.Entity.User.dcm.yml
+---
+CodeEmailMKT\Domain\Entity\User:
+    type: entity
+    #repositoryClass: CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository\CustomerRepository
+    table: users
+    id:
+        id:
+            type: integer
+    fields:
+        name:
+            type: string(200)
+        email:
+            type: string(200)
+            unique: true
+        password:
+            type: string(60)
