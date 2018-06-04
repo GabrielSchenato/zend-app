@@ -2,6 +2,8 @@
 
 namespace CodeEmailMKT\Application\Action\Customer;
 
+use CodeEmailMKT\Application\Form\CustomerForm;
+use CodeEmailMKT\Application\Form\HttpMethodElement;
 use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -30,22 +32,23 @@ class CustomerUpdatePageAction {
     {
         $id = $request->getAttribute('id');
         $entity = $this->repository->find($id);
-        
-        if($request->getMethod() == "PUT"){
-            $data = $request->getParsedBody();
-            $entity->setName($data['name']);
-            $entity->setEmail($data['email']);
-            $this->repository->update($entity);
+        $form = new CustomerForm();
+        $form->add(new HttpMethodElement('PUT'));
+        $form->bind($entity);
+        if ($request->getMethod() == "PUT") {
             $flash = $request->getAttribute('flash');
-            $flash->setMessage('success', 'Contato editado com sucesso');
-            
-            $uri = $this->router->generateUri('list.customers');
-                        
-            return new RedirectResponse($uri);
+            $dataRaw = $request->getParsedBody();
+            $form->setData($dataRaw);
+            if ($form->isValid()) {
+                $entity = $form->getData();
+                $this->repository->update($entity);
+                $flash->setMessage('success', 'Contato editado com sucesso');
+                $uri = $this->router->generateUri('list.customers');
+                return new RedirectResponse($uri);
+            }
         }
-        
         return new HtmlResponse($this->template->render("app::customer/update",[
-            'customer' => $entity
+            'form' => $form
         ]));
     }
 

@@ -2,6 +2,8 @@
 
 namespace CodeEmailMKT\Application\Action\Customer;
 
+use CodeEmailMKT\Application\Form\CustomerForm;
+use CodeEmailMKT\Application\Form\HttpMethodElement;
 use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -30,6 +32,9 @@ class CustomerDeletePageAction {
     {
         $id = $request->getAttribute('id');
         $entity = $this->repository->find($id);
+        $form = new CustomerForm();
+        $form->add(new HttpMethodElement('DELETE'));
+        $form->bind($entity);
         
         if($request->getMethod() == "DELETE"){
             $data = $request->getParsedBody();
@@ -43,7 +48,7 @@ class CustomerDeletePageAction {
         }
         
         return new HtmlResponse($this->template->render("app::customer/delete",[
-            'customer' => $entity
+            'form' => $form
         ]));
     }
 

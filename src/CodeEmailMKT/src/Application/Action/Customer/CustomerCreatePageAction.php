@@ -32,16 +32,14 @@ class CustomerCreatePageAction {
     {
         $form = new CustomerForm();
         if($request->getMethod() == "POST"){
+            $flash = $request->getAttribute('flash');
             $dataRaw = $request->getParsedBody();
             $form->setData($dataRaw);
             if ($form->isValid()) {
                 $entity = $form->getData();
                 $this->repository->create($entity);
-                $flash = $request->getAttribute('flash');
                 $flash->setMessage('success', 'Contato cadastrado com sucesso');
-
                 $uri = $this->router->generateUri('list.customers');
-
                 return new RedirectResponse($uri);
             }
         }
