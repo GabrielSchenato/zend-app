@@ -32,17 +32,21 @@ class CustomerCreatePageAction {
     {
         $form = new CustomerForm();
         if($request->getMethod() == "POST"){
-            $data = $request->getParsedBody();
-            $entity = new Customer();
-            $entity->setName($data['name']);
-            $entity->setEmail($data['email']);
-            $this->repository->create($entity);
-            $flash = $request->getAttribute('flash');
-            $flash->setMessage('success', 'Contato cadastrado com sucesso');
-            
-            $uri = $this->router->generateUri('list.customers');
-                        
-            return new RedirectResponse($uri);
+            $dataRaw = $request->getParsedBody();
+            $form->setData($dataRaw);
+            if ($form->isValid()) {
+                $data = $form->getData();
+                $entity = new Customer();
+                $entity->setName($data['name']);
+                $entity->setEmail($data['email']);
+                $this->repository->create($entity);
+                $flash = $request->getAttribute('flash');
+                $flash->setMessage('success', 'Contato cadastrado com sucesso');
+
+                $uri = $this->router->generateUri('list.customers');
+
+                return new RedirectResponse($uri);
+            }
         }
         
         return new HtmlResponse($this->template->render("app::customer/create", [

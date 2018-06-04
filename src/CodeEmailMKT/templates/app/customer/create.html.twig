@@ -7,10 +7,9 @@
     {% do email.setAttribute('class', 'form-control') %}
     
     {% set submit = form.get('submit') %}
-    {% do 
-        submit.setAttribute('class', 'btn btn-primary')
-        .setLabel('Incluir')
-    %}
+    {% do submit.setAttribute('class', 'btn btn-primary').setLabel('Incluir') %}
+    {% do form.setAttribute('action', url('customer.create')) %}
+    {% do form.prepare() %}
     <div class="row">
         <div class="col-md-8">
             <div class="box box-primary">
