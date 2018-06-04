@@ -7,6 +7,8 @@ CodeEmailMKT\Domain\Entity\User:
     id:
         id:
             type: integer
+            generator:
+                strategy: AUTO
     fields:
         name:
             type: string(200)
@@ -15,5 +17,5 @@ CodeEmailMKT\Domain\Entity\User:
             unique: true
         password:
             type: string(60)
-    lifeCycleCallbacks:
+    lifecycleCallbacks:
         prePersist: [generatePassword]
