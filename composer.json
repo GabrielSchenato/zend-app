@@ -20,10 +20,10 @@
         "zendframework/zend-expressive-aurarouter": "^2.2",
         "zendframework/zend-expressive-helpers": "^4.0",
         "zendframework/zend-expressive-twigrenderer": "^1.4",
+        "zendframework/zend-form": "2.12.0",
+        "zendframework/zend-i18n": "^2.9.0",
         "zendframework/zend-servicemanager": "^3.3",
         "zendframework/zend-stdlib": "^3.1",
-        "zendframework/zend-i18n": "^2.9.0",
-        "zendframework/zend-form": "2.12.0",
         "zendframework/zend-view": "2.10.0"
     },
     "require-dev": {
@@ -32,7 +32,8 @@
         "zfcampus/zf-development-mode": "^3.1",
         "zendframework/zend-expressive-tooling": "^0.4.1",
         "filp/whoops": "^2.1.7",
-        "codeedu/zendexpr-doctrine-fixture": "0.0.1"
+        "codeedu/zendexpr-doctrine-fixture": "0.0.1",
+        "fzaninotto/faker": "^1.7"
     },
     "autoload": {
         "psr-4": {
