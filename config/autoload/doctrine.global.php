@@ -1,7 +1,7 @@
 <?php
 
 use CodeEmailMKT\Domain\Entity\User;
-use DoctrineORMModule\Options\EntityManager;
+use Doctrine\ORM\EntityManager;
 
 return [
     'doctrine' => [

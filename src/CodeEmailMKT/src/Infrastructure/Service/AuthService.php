@@ -29,7 +29,11 @@ class AuthService implements AuthInterface{
     }
     public function authenticate($email, $password)
     {
-        
+        $adapter = $this->authenticationService->getAdapter();
+        $adapter->setIdentity($email);
+        $adapter->setCredential($password);
+        $result = $this->authenticationService->authenticate();
+        return $result->isValid();
     }
 
     public function destroy()
