@@ -25,6 +25,7 @@ return [
             'Zend\Expressive\Delegate\DefaultDelegate' => Delegate\NotFoundDelegate::class,
             'Configuration' => 'config', //Doctrine needs a service called Configuration
             'Config' => 'config', //Doctrine needs a service called Configuration
+            \Zend\Authentication\AuthenticationService::class => 'doctrine.authenticationservice.orm_default'
         ],
         // Use 'invokables' for constructor-less services, or services that do
         // not require arguments to the constructor. Map a service name to the
