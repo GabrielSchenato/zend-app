@@ -35,10 +35,7 @@ class CustomerCreatePageAction {
             $dataRaw = $request->getParsedBody();
             $form->setData($dataRaw);
             if ($form->isValid()) {
-                $data = $form->getData();
-                $entity = new Customer();
-                $entity->setName($data['name']);
-                $entity->setEmail($data['email']);
+                $entity = $form->getData();
                 $this->repository->create($entity);
                 $flash = $request->getAttribute('flash');
                 $flash->setMessage('success', 'Contato cadastrado com sucesso');

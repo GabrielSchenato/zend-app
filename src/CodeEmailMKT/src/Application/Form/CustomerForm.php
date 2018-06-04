@@ -2,11 +2,13 @@
 
 namespace CodeEmailMKT\Application\Form;
 
+use CodeEmailMKT\Domain\Entity\Customer;
 use Zend\Form\Element\Button;
 use Zend\Form\Element\Email;
 use Zend\Form\Element\Hidden;
 use Zend\Form\Element\Text;
 use Zend\Form\Form;
+use Zend\Hydrator\ClassMethods;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,6 +26,8 @@ class CustomerForm extends Form
     public function __construct($name = 'customer', $options = array())
     {
         parent::__construct($name, $options);
+        $this->setHydrator(new ClassMethods());
+        $this->setObject(new Customer());
         
         $this->add([
            'name' => 'id',
