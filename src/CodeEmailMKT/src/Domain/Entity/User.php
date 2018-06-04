@@ -19,7 +19,8 @@ class User {
     private $name;
     private $email;
     private $password;
-
+    private $plainPassword;
+    
     function getId()
     {
         return $this->id;
@@ -59,6 +60,22 @@ class User {
     {
         $this->password = $password;
         return $this;
+    }
+    function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+        return $this;
+    }
+    
+    public function generatePassword()
+    {
+        $password = $this->getPlainPassword() ? $this->getPlainPassword() : uniqid();
+        $this->setPassword(password_hash($password, PASSWORD_BCRYPT));
     }
 
 }

@@ -15,3 +15,5 @@ CodeEmailMKT\Domain\Entity\User:
             unique: true
         password:
             type: string(60)
+    lifeCycleCallbacks:
+        prePersist: [generatePassword]
