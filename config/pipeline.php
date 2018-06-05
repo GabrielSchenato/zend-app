@@ -20,6 +20,7 @@ use Zend\Stratigility\Middleware\ErrorHandler;
 $app->pipe(ErrorHandler::class);
 $app->pipe(CodeEmailMKT\Application\Middleware\BootstrapMiddleware::class);
 $app->pipe(CodeEmailMKT\Application\Middleware\TwigMiddleware::class);
+$app->pipe('/admin', CodeEmailMKT\Application\Middleware\AuthenticationMiddleware::class);
 $app->pipe(ServerUrlMiddleware::class);
 // Pipe more middleware here that you want to execute on every request:
 // - bootstrapping

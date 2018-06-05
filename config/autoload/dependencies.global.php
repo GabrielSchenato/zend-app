@@ -1,14 +1,16 @@
 <?php
 
 use CodeEdu\FixtureFactory;
+use CodeEmailMKT\Application\Middleware\AuthenticationMiddleware;
+use CodeEmailMKT\Application\Middleware\AuthenticationMiddlewareFactory;
 use CodeEmailMKT\Application\Middleware\BootstrapMiddleware;
 use CodeEmailMKT\Application\Middleware\BootstrapMiddlewareFactory;
 use CodeEmailMKT\Application\Middleware\TwigMiddleware;
 use CodeEmailMKT\Application\Middleware\TwigMiddlewareFactory;
 use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
+use CodeEmailMKT\Domain\Service\AuthInterface;
 use CodeEmailMKT\Domain\Service\FlashMessageInterface;
 use CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository\CustomerRepositoryFactory;
-use CodeEmailMKT\Infrastructure\Service\AuthService;
 use CodeEmailMKT\Infrastructure\Service\Factory\AuthServiceFactory;
 use CodeEmailMKT\Infrastructure\Service\Factory\FlashMessageFactory;
 use Zend\Authentication\AuthenticationService;
@@ -54,8 +56,9 @@ return [
             CustomerRepositoryInterface::class => CustomerRepositoryFactory::class,
             FlashMessageInterface::class => FlashMessageFactory::class,
             BootstrapMiddleware::class => BootstrapMiddlewareFactory::class,
+            AuthenticationMiddleware::class => AuthenticationMiddlewareFactory::class,
             TwigMiddleware::class => TwigMiddlewareFactory::class,
-            AuthService::class => AuthServiceFactory::class,
+            AuthInterface::class => AuthServiceFactory::class,
         ],
     ],
 ];

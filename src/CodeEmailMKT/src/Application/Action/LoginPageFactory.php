@@ -4,7 +4,7 @@ namespace CodeEmailMKT\Application\Action;
 
 use CodeEmailMKT\Application\Action\LoginPageAction;
 use CodeEmailMKT\Application\Form\LoginForm;
-use CodeEmailMKT\Infrastructure\Service\AuthService;
+use CodeEmailMKT\Domain\Service\AuthInterface;
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
@@ -16,7 +16,7 @@ class LoginPageFactory {
         $router = $container->get(RouterInterface::class);
         $template = $container->get(TemplateRendererInterface::class);
         $form = $container->get(LoginForm::class);
-        $authService = $container->get(AuthService::class);
+        $authService = $container->get(AuthInterface::class);
         return new LoginPageAction($router, $template, $form, $authService);
     }
 

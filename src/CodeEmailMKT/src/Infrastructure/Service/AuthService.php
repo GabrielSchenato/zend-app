@@ -43,12 +43,12 @@ class AuthService implements AuthInterface{
 
     public function getUser()
     {
-        
+        return $this->authenticationService->getIdentity();
     }
 
     public function isAuth()
     {
-        
+        return $this->getUser() != null;
     }
 
 }
