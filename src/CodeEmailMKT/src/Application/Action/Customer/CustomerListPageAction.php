@@ -3,6 +3,7 @@
 namespace CodeEmailMKT\Application\Action\Customer;
 
 use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
+use CodeEmailMKT\Domain\Service\FlashMessageInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -22,7 +23,7 @@ class CustomerListPageAction {
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
         $customers = $this->repository->findAll();
-        $flash = $request->getAttribute('flash')->getMessage('success');
+        $flash = $request->getAttribute('flash')->getMessage(FlashMessageInterface::MESSAGE_SUCCESS);
         return new HtmlResponse($this->template->render("app::customer/list", [
                     'customers' => $customers,
                     'message' => $flash

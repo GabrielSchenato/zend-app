@@ -1,6 +1,5 @@
 <?php
 
-use Aura\Session\Session;
 use CodeEdu\FixtureFactory;
 use CodeEmailMKT\Application\Middleware\BootstrapMiddleware;
 use CodeEmailMKT\Application\Middleware\BootstrapMiddlewareFactory;
@@ -12,7 +11,6 @@ use CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository\CustomerReposito
 use CodeEmailMKT\Infrastructure\Service\AuthService;
 use CodeEmailMKT\Infrastructure\Service\Factory\AuthServiceFactory;
 use CodeEmailMKT\Infrastructure\Service\Factory\FlashMessageFactory;
-use DaMess\Factory\AuraSessionFactory;
 use Zend\Authentication\AuthenticationService;
 use Zend\Expressive\Application;
 use Zend\Expressive\Container;
@@ -54,7 +52,6 @@ return [
             Middleware\NotFoundHandler::class                => Container\NotFoundHandlerFactory::class,
             'doctrine:fixtures_cmd:load' => FixtureFactory::class,
             CustomerRepositoryInterface::class => CustomerRepositoryFactory::class,
-            Session::class => AuraSessionFactory::class,
             FlashMessageInterface::class => FlashMessageFactory::class,
             BootstrapMiddleware::class => BootstrapMiddlewareFactory::class,
             TwigMiddleware::class => TwigMiddlewareFactory::class,

@@ -2,9 +2,8 @@
 
 namespace CodeEmailMKT\Infrastructure\Service;
 
-use Aura\Session\Segment;
-use Aura\Session\Session;
 use CodeEmailMKT\Domain\Service\FlashMessageInterface;
+use Zend\Mvc\Plugin\FlashMessenger\FlashMessenger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,43 +19,39 @@ use CodeEmailMKT\Domain\Service\FlashMessageInterface;
 class FlashMessage implements FlashMessageInterface {
 
     /**
-     * @var Session
+     * @var FlashMessenger
      */
-    private $session;
+    private $flashMessenger;
 
-    /**
-     * @var Segment
-     */
-    private $segment;
-
-    public function __construct(Session $session)
+    public function __construct(FlashMessenger $flashMessenger)
     { 
-        $this->session = $session;
-        if (!$this->session->isStarted()) {
-            $this->session->start();
-        }
+        $this->flashMessenger = $flashMessenger;
     }
 
     public function getMessage($key)
     {
-        if (!$this->segment) {
-            $this->setNamespace();
+        $result = null;
+        switch ($key){
+            case self::MESSAGE_SUCCESS:
+                $result = $this->flashMessenger->getCurrentSuccessMessages();
+                break;
         }
-        return $this->segment->getFlash($key);
+        return count($result) ? $result[0] : null;
     }
 
     public function setMessage($key, $value)
     {
-        if (!$this->segment) {
-            $this->setNamespace();
-        }
-        $this->segment->setFlash($key, $value);
+        switch ($key){
+            case self::MESSAGE_SUCCESS:
+                $this->flashMessenger->addSuccessMessage($value);
+                break;
+        }        
         return $this;
     }
 
     public function setNamespace($name = __NAMESPACE__)
     {
-        $this->segment = $this->session->getSegment($name);
+        $this->flashMessenger->setNamespace($name);
         return $this;
     }
 

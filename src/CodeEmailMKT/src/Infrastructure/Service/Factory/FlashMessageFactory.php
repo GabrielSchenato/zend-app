@@ -2,9 +2,9 @@
 
 namespace CodeEmailMKT\Infrastructure\Service\Factory;
 
-use Aura\Session\Session;
 use CodeEmailMKT\Infrastructure\Service\FlashMessage;
 use Interop\Container\ContainerInterface;
+use Zend\Mvc\Plugin\FlashMessenger\FlashMessenger;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -21,8 +21,8 @@ class FlashMessageFactory
     
     public function __invoke(ContainerInterface $container)
     {
-        $session = $container->get(Session::class);
-        return new FlashMessage($session);
+        $flashMessenger = new FlashMessenger();
+        return new FlashMessage($flashMessenger);
     }
 
 }
