@@ -1,24 +1,26 @@
 <?php
 
 use CodeEdu\FixtureFactory;
-use CodeEmailMKT\Application\Middleware\AuthenticationMiddleware;
-use CodeEmailMKT\Application\Middleware\AuthenticationMiddlewareFactory;
-use CodeEmailMKT\Application\Middleware\BootstrapMiddleware;
-use CodeEmailMKT\Application\Middleware\BootstrapMiddlewareFactory;
-use CodeEmailMKT\Application\Middleware\TwigMiddleware;
-use CodeEmailMKT\Application\Middleware\TwigMiddlewareFactory;
-use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
-use CodeEmailMKT\Domain\Service\AuthInterface;
-use CodeEmailMKT\Domain\Service\FlashMessageInterface;
+use CodeEmailMKT\Application\Middleware\{
+  AuthenticationMiddleware,
+  AuthenticationMiddlewareFactory,
+  BootstrapMiddleware,
+  BootstrapMiddlewareFactory,
+  TwigMiddleware,
+  TwigMiddlewareFactory  
+};
+use CodeEmailMKT\Domain\Service\{AuthInterface, FlashMessageInterface};
+use CodeEmailMKT\Infrastructure\Service\Factory\{AuthServiceFactory, FlashMessageFactory};
 use CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository\CustomerRepositoryFactory;
-use CodeEmailMKT\Infrastructure\Service\Factory\AuthServiceFactory;
-use CodeEmailMKT\Infrastructure\Service\Factory\FlashMessageFactory;
+use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
+use Zend\Expressive\{
+  Application,
+  Container,
+  Delegate,
+  Helper,
+  Middleware
+};
 use Zend\Authentication\AuthenticationService;
-use Zend\Expressive\Application;
-use Zend\Expressive\Container;
-use Zend\Expressive\Delegate;
-use Zend\Expressive\Helper;
-use Zend\Expressive\Middleware;
 use Zend\Stratigility\Middleware\ErrorHandler;
 
 return [
