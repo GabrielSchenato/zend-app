@@ -59,9 +59,30 @@ class Customer {
     {
         $this->email = $email;
     }
+
     function getTags(): Collection
     {
         return $this->tags;
+    }
+
+    public function addTags(Collection $tags)
+    {
+        /** @var Tag $tag */
+        foreach ($tags as $tag) {
+            $tag->getCustomers()->add($this);
+            $this->tags->add($tag);
+        }
+        return $this;
+    }
+
+    public function removeTags(Collection $tags)
+    {
+        /** @var Tag $tag */
+        foreach ($tags as $tag) {
+            $tag->getCustomers()->removeElement($this);
+            $this->tags->removeElement($tag);
+        }
+        return $this;
     }
 
 }
