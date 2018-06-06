@@ -1,11 +1,11 @@
 <?php
 
-use CodeEmailMKT\Application\Action\Customer\CustomerCreatePageAction;
-use CodeEmailMKT\Application\Action\Customer\CustomerDeletePageAction;
-use CodeEmailMKT\Application\Action\Customer\CustomerListPageAction;
-use CodeEmailMKT\Application\Action\Customer\CustomerUpdatePageAction;
-use CodeEmailMKT\Application\Action\LoginPageAction;
-use CodeEmailMKT\Application\Action\LogoutAction;
+use CodeEmailMKT\Application\Action\Customer\{
+    CustomerCreatePageAction, CustomerDeletePageAction, CustomerListPageAction, CustomerUpdatePageAction    
+};
+use CodeEmailMKT\Application\Action\{
+    LoginPageAction, LogoutAction    
+};
 use Zend\Expressive\Application;
 /**
  * Setup routes with a single request method:
@@ -36,12 +36,10 @@ use Zend\Expressive\Application;
 
 /** @var Application $app */
 
-$app->get('/', CodeEmailMKT\Action\HomePageAction::class, 'home');
-$app->get('/api/ping', CodeEmailMKT\Action\PingAction::class, 'api.ping');
-
 $app->route('/auth/login', LoginPageAction::class, ['GET', 'POST',], 'auth.login');
 $app->get('/auth/logout', LogoutAction::class, 'auth.logout');
 
+$app->get('/', CustomerListPageAction::class, 'home');
 $app->get('/admin/customers', CustomerListPageAction::class, 'list.customers');
 $app->route('/admin/customer/create', CustomerCreatePageAction::class, ['GET', 'POST',], 'customer.create');
 $app->route('/admin/customer/update/{id}', CustomerUpdatePageAction::class, ['GET', 'PUT',], 'customer.update')->setOptions([

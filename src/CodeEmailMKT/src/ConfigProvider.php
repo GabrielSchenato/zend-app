@@ -2,20 +2,24 @@
 
 namespace CodeEmailMKT;
 
-use CodeEmailMKT\Application\Action\Customer\CustomerCreatePageAction;
-use CodeEmailMKT\Application\Action\Customer\CustomerDeletePageAction;
-use CodeEmailMKT\Application\Action\Customer\CustomerListPageAction;
-use CodeEmailMKT\Application\Action\Customer\CustomerUpdatePageAction;
-use CodeEmailMKT\Application\Action\Customer\Factory\CustomerCreatePageFactory;
-use CodeEmailMKT\Application\Action\Customer\Factory\CustomerDeletePageFactory;
-use CodeEmailMKT\Application\Action\Customer\Factory\CustomerListPageFactory;
-use CodeEmailMKT\Application\Action\Customer\Factory\CustomerUpdatePageFactory;
-use CodeEmailMKT\Application\Action\HomePageFactory;
-use CodeEmailMKT\Application\Action\LoginPageAction;
-use CodeEmailMKT\Application\Action\LoginPageFactory;
-use CodeEmailMKT\Application\Action\LogoutAction;
-use CodeEmailMKT\Application\Action\LogoutFactory;
-use CodeEmailMKT\Application\Action\PingAction;
+use CodeEmailMKT\Application\Action\Customer\{
+    CustomerCreatePageAction,
+    CustomerDeletePageAction,
+    CustomerListPageAction,
+    CustomerUpdatePageAction
+};
+use CodeEmailMKT\Application\Action\Customer\Factory\{
+    CustomerCreatePageFactory,
+    CustomerDeletePageFactory,
+    CustomerListPageFactory,
+    CustomerUpdatePageFactory
+};
+use CodeEmailMKT\Application\Action\{
+    LoginPageAction,
+    LoginPageFactory,
+    LogoutAction,
+    LogoutFactory
+};
 
 /**
  * The configuration provider for the App module
@@ -49,10 +53,8 @@ class ConfigProvider
     {
         return [
             'invokables' => [
-                Action\PingAction::class => PingAction::class,
             ],
             'factories'  => [
-                Action\HomePageAction::class => HomePageFactory::class,
                 LoginPageAction::class => LoginPageFactory::class,
                 LogoutAction::class => LogoutFactory::class,
                 CustomerListPageAction::class => CustomerListPageFactory::class,

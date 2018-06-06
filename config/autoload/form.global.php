@@ -1,9 +1,13 @@
 <?php
 
-use CodeEmailMKT\Application\Form\CustomerForm;
-use CodeEmailMKT\Application\Form\Factory\CustomerFormFactory;
-use CodeEmailMKT\Application\Form\Factory\LoginFormFactory;
-use CodeEmailMKT\Application\Form\LoginForm;
+use CodeEmailMKT\Application\Form\{
+    CustomerForm,
+    LoginForm
+};
+use CodeEmailMKT\Application\Form\Factory\{
+    CustomerFormFactory,
+    LoginFormFactory
+};
 use CodeEmailMKT\Infrastructure\View\HelperPluginManagerFactory;
 use Zend\Form\ConfigProvider;
 use Zend\Stdlib\ArrayUtils;

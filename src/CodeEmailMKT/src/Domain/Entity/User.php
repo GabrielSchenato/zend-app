@@ -1,5 +1,7 @@
 <?php
 
+declare (strict_types = 1);
+
 namespace CodeEmailMKT\Domain\Entity;
 
 /*
@@ -20,7 +22,7 @@ class User {
     private $email;
     private $password;
     private $plainPassword;
-    
+
     function getId()
     {
         return $this->id;
@@ -41,12 +43,12 @@ class User {
         $this->id = $id;
     }
 
-    function setName($name)
+    function setName(string $name)
     {
         $this->name = $name;
     }
 
-    function setEmail($email)
+    function setEmail(string $email)
     {
         $this->email = $email;
     }
@@ -56,25 +58,26 @@ class User {
         return $this->password;
     }
 
-    function setPassword($password)
+    function setPassword(string $password)
     {
         $this->password = $password;
         return $this;
     }
+
     function getPlainPassword()
     {
         return $this->plainPassword;
     }
 
-    function setPlainPassword($plainPassword)
+    function setPlainPassword(string $plainPassword)
     {
         $this->plainPassword = $plainPassword;
         return $this;
     }
-    
+
     public function generatePassword()
     {
-        $password = $this->getPlainPassword() ? $this->getPlainPassword() : uniqid();
+        $password = $this->getPlainPassword() ?? uniqid();
         $this->setPassword(password_hash($password, PASSWORD_BCRYPT));
     }
 

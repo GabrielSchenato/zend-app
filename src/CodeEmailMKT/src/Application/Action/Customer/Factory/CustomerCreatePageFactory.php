@@ -10,8 +10,8 @@ use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 class CustomerCreatePageFactory {
-    
-    public function __invoke(ContainerInterface $container)
+
+    public function __invoke(ContainerInterface $container): CustomerCreatePageAction
     {
         $template = $container->get(TemplateRendererInterface::class);
         $repository = $container->get(CustomerRepositoryInterface::class);

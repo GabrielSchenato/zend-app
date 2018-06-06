@@ -7,14 +7,14 @@ use CodeEmailMKT\Application\InputFilter\LoginInputFilter;
 use Interop\Container\ContainerInterface;
 
 class LoginFormFactory {
-    
-    public function __invoke(ContainerInterface $container)
+
+    public function __invoke(ContainerInterface $container): LoginForm
     {
         $form = new LoginForm();
         //$form->setHydrator(new ClassMethods());
         //$form->setObject(new Customer());
         $form->setInputFilter(new LoginInputFilter());
-        
+
         return $form;
     }
 

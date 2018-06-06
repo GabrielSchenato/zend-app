@@ -23,14 +23,16 @@ class BootstrapMiddleware {
         $this->bootstrap->create();
         $request = $request->withAttribute('flash', $this->flash);
         $request = $this->spoofingMethod($request);
-        
+
         return $next($request, $response);
     }
-    
-    protected function spoofingMethod(ServerRequestInterface $request){
+
+    protected function spoofingMethod(ServerRequestInterface $request): ServerRequestInterface
+    {
         $data = $request->getParsedBody();
-        $method = isset($data['_method']) ? strtoupper($data['_method']) : '';
-        if(in_array($method, ['PUT', 'DELETE'])){
+        $method = $data['_method'] ?? '';
+        $method = strtoupper($method);
+        if (in_array($method, ['PUT', 'DELETE'])) {
             $request = $request->withMethod($method);
         }
         return $request;

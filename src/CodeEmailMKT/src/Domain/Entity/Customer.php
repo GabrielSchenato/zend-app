@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types = 1);
 namespace CodeEmailMKT\Domain\Entity;
 
 /*
@@ -13,35 +14,40 @@ namespace CodeEmailMKT\Domain\Entity;
  *
  * @author gabriel
  */
-class Customer 
-{
+class Customer {
+
     private $id;
-    
     private $name;
-    
     private $email;
-    
-    function getId() {
+
+    function getId()
+    {
         return $this->id;
     }
 
-    function getName() {
+    function getName()
+    {
         return $this->name;
     }
 
-    function getEmail() {
+    function getEmail()
+    {
         return $this->email;
     }
 
-    function setId($id) {
+    function setId($id)
+    {
         $this->id = $id;
     }
 
-    function setName($name) {
+    function setName(string $name)
+    {
         $this->name = $name;
     }
 
-    function setEmail($email) {
+    function setEmail(string $email)
+    {
         $this->email = $email;
     }
+
 }

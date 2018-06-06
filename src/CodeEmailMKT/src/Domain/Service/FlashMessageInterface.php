@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types = 1);
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,9 +16,10 @@ namespace CodeEmailMKT\Domain\Service;
 interface FlashMessageInterface {
 
     const MESSAGE_SUCCESS = 0;
-    public function setNamespace($name);
 
-    public function setMessage($key, $value);
+    public function setNamespace(string $name);
+
+    public function setMessage($key, string $value);
 
     public function getMessage($key);
 }

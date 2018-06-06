@@ -8,6 +8,7 @@
 
 namespace CodeEmailMKT\Infrastructure\Service;
 
+use CodeEmailMKT\Domain\Entity\User;
 use CodeEmailMKT\Domain\Service\AuthInterface;
 use Zend\Authentication\AuthenticationService;
 
@@ -27,7 +28,7 @@ class AuthService implements AuthInterface{
     {
         $this->authenticationService = $authenticationService;
     }
-    public function authenticate($email, $password)
+    public function authenticate(string $email, string $password): bool
     {
         $adapter = $this->authenticationService->getAdapter();
         $adapter->setIdentity($email);
@@ -41,12 +42,12 @@ class AuthService implements AuthInterface{
         $this->authenticationService->clearIdentity();
     }
 
-    public function getUser()
+    public function getUser(): User
     {
         return $this->authenticationService->getIdentity();
     }
 
-    public function isAuth()
+    public function isAuth(): bool
     {
         return $this->getUser() != null;
     }
