@@ -2,7 +2,7 @@
 ---
 CodeEmailMKT\Domain\Entity\Tag:
     type: entity
-    #repositoryClass: CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository\TagRepository
+    repositoryClass: CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository\TagRepository
     table: tags
     id:
         id:

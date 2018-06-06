@@ -1,0 +1,34 @@
+{% extends "@layout/default.html.twig" %}
+{% block content %}
+    {% include '@app/tag/_form-elements.html.twig' %}
+    
+    {% set submit = form.get('submit') %}
+    {% do submit.setAttribute('class', 'btn btn-danger').setLabel('Excluir') %}
+    {% do form.setAttribute('action', url('tag.delete', {id: form.getObject().id})) %}
+    {% do form.prepare() %}
+    <div class="row">
+        <div class="col-md-8">
+            <div class="box box-danger">
+                <div class="box-body">                    
+                    <fieldset disabled>
+                        {% include '@app/tag/_form.html.twig' %}
+                    </fieldset>              
+                    {{ form().openTag(form) | raw }}
+                    {{ formHidden(form.get('_method')) }}
+                    <div class="box-footer">
+                        {{ formButton(submit) }}
+                    </div>
+                    {{ form().closeTag() | raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block title %}
+    Excluir Tag - {{ parent() }}
+{% endblock %}
+
+{% block page_header %}
+    Excluir Tag {{ form.getObject().name }}
+{% endblock %}

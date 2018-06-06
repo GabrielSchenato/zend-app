@@ -12,7 +12,6 @@ namespace CodeEmailMKT\Domain\Service;
 
 namespace CodeEmailMKT\Domain\Service;
 
-use CodeEmailMKT\Domain\Entity\User;
 
 /**
  *
@@ -24,7 +23,7 @@ interface AuthInterface {
 
     public function isAuth(): bool;
 
-    public function getUser(): User;
+    public function getUser();
 
     public function destroy();
 }

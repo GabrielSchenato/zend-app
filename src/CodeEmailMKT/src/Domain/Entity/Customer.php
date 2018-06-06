@@ -5,6 +5,7 @@ declare (strict_types = 1);
 namespace CodeEmailMKT\Domain\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -57,6 +58,10 @@ class Customer {
     function setEmail(string $email)
     {
         $this->email = $email;
+    }
+    function getTags(): Collection
+    {
+        return $this->tags;
     }
 
 }

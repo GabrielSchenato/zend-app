@@ -14,6 +14,18 @@ use CodeEmailMKT\Application\Action\Customer\Factory\{
     CustomerListPageFactory,
     CustomerUpdatePageFactory
 };
+use \CodeEmailMKT\Application\Action\Tag\{
+    TagCreatePageAction,
+    TagDeletePageAction,
+    TagListPageAction,
+    TagUpdatePageAction
+};
+use \CodeEmailMKT\Application\Action\Tag\Factory\{
+    TagCreatePageFactory,
+    TagDeletePageFactory,
+    TagListPageFactory,
+    TagUpdatePageFactory
+};
 use CodeEmailMKT\Application\Action\{
     LoginPageAction,
     LoginPageFactory,
@@ -61,6 +73,10 @@ class ConfigProvider
                 CustomerCreatePageAction::class => CustomerCreatePageFactory::class,
                 CustomerUpdatePageAction::class => CustomerUpdatePageFactory::class,
                 CustomerDeletePageAction::class => CustomerDeletePageFactory::class,
+                TagListPageAction::class => TagListPageFactory::class,
+                TagCreatePageAction::class => TagCreatePageFactory::class,
+                TagUpdatePageAction::class => TagUpdatePageFactory::class,
+                TagDeletePageAction::class => TagDeletePageFactory::class,
             ],
         ];
     }

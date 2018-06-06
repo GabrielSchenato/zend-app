@@ -3,7 +3,9 @@
 namespace CodeEmailMKT\Infrastructure\Persistence\Doctrine\DataFixture;
 
 use CodeEmailMKT\Domain\Entity\Customer;
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker;
 
@@ -18,21 +20,27 @@ use Faker;
  *
  * @author gabriel
  */
-class CustomerFixture implements FixtureInterface {
+class CustomerFixture extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface {
 
     public function load(ObjectManager $manager)
     {
         $faker = Faker\Factory::create();
 
-        foreach (range(1, 100) as $value) {
+        foreach (range(1, 100) as $key => $value) {
             $customer = new Customer();
             $customer->setName($faker->firstName . ' ' . $faker->lastName);
             $customer->setEmail($faker->email);
 
             $manager->persist($customer);
+            $this->addReference("customer-$key", $customer);
         }
 
         $manager->flush();
+    }
+
+    public function getOrder()
+    {
+        return 100;
     }
 
 }

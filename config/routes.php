@@ -3,6 +3,9 @@
 use CodeEmailMKT\Application\Action\Customer\{
     CustomerCreatePageAction, CustomerDeletePageAction, CustomerListPageAction, CustomerUpdatePageAction    
 };
+use CodeEmailMKT\Application\Action\Tag\{
+    TagCreatePageAction, TagDeletePageAction, TagListPageAction, TagUpdatePageAction    
+};
 use CodeEmailMKT\Application\Action\{
     LoginPageAction, LogoutAction    
 };
@@ -46,5 +49,14 @@ $app->route('/admin/customer/update/{id}', CustomerUpdatePageAction::class, ['GE
         'tokens' => ['id' => '\d+'],
     ]);
 $app->route('/admin/customer/delete/{id}', CustomerDeletePageAction::class, ['GET', 'DELETE',], 'customer.delete')->setOptions([
+        'tokens' => ['id' => '\d+'],
+    ]);
+
+$app->get('/admin/tags', TagListPageAction::class, 'list.tags');
+$app->route('/admin/tag/create', TagCreatePageAction::class, ['GET', 'POST',], 'tag.create');
+$app->route('/admin/tag/update/{id}', TagUpdatePageAction::class, ['GET', 'PUT',], 'tag.update')->setOptions([
+        'tokens' => ['id' => '\d+'],
+    ]);
+$app->route('/admin/tag/delete/{id}', TagDeletePageAction::class, ['GET', 'DELETE',], 'tag.delete')->setOptions([
         'tokens' => ['id' => '\d+'],
     ]);

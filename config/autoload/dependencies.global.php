@@ -11,8 +11,12 @@ use CodeEmailMKT\Application\Middleware\{
 };
 use CodeEmailMKT\Domain\Service\{AuthInterface, FlashMessageInterface};
 use CodeEmailMKT\Infrastructure\Service\Factory\{AuthServiceFactory, FlashMessageFactory};
-use CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository\CustomerRepositoryFactory;
-use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
+use CodeEmailMKT\Domain\Persistence\{
+    CustomerRepositoryInterface, TagRepositoryInterface
+};
+use CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository\{
+    CustomerRepositoryFactory, TagRepositoryFactory    
+};
 use Zend\Expressive\{
   Application,
   Container,
@@ -56,6 +60,7 @@ return [
             Middleware\NotFoundHandler::class                => Container\NotFoundHandlerFactory::class,
             'doctrine:fixtures_cmd:load' => FixtureFactory::class,
             CustomerRepositoryInterface::class => CustomerRepositoryFactory::class,
+            TagRepositoryInterface::class => TagRepositoryFactory::class,
             FlashMessageInterface::class => FlashMessageFactory::class,
             BootstrapMiddleware::class => BootstrapMiddlewareFactory::class,
             AuthenticationMiddleware::class => AuthenticationMiddlewareFactory::class,

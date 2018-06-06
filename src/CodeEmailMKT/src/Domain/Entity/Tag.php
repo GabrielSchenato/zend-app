@@ -10,6 +10,7 @@ declare (strict_types = 1);
 namespace CodeEmailMKT\Domain\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Description of Tag
@@ -48,5 +49,10 @@ class Tag {
         $this->name = $name;
         return $this;
     }
+    function getCustomers(): Collection
+    {
+        return $this->customers;
+    }
+
 
 }
