@@ -11,9 +11,12 @@ CodeEmailMKT\Domain\Entity\Customer:
                 strategy: AUTO
     fields:
         name:
-            type: string
-            lenght: 200
+            type: string(200)
             nullable: true
         email:
-            type: string
-            lenght: 200
+            type: string(200)
+    manyToMany:
+        tags:
+            targetEntity: CodeEmailMKT\Domain\Entity\Tag
+            mappedBy: customers
+            

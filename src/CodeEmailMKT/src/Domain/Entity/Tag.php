@@ -1,32 +1,30 @@
 <?php
 
 declare (strict_types = 1);
-
-namespace CodeEmailMKT\Domain\Entity;
-
-use Doctrine\Common\Collections\ArrayCollection;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
+namespace CodeEmailMKT\Domain\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
- * Description of Customer
+ * Description of Tag
  *
  * @author gabriel
  */
-class Customer {
+class Tag {
 
     private $id;
     private $name;
-    private $email;
-    private $tags;
+    private $customers;
 
     public function __construct()
     {
-        $this->tags = new ArrayCollection();
+        $this->customers = new ArrayCollection();
     }
 
     function getId()
@@ -39,24 +37,16 @@ class Customer {
         return $this->name;
     }
 
-    function getEmail()
-    {
-        return $this->email;
-    }
-
     function setId($id)
     {
         $this->id = $id;
+        return $this;
     }
 
     function setName(string $name)
     {
         $this->name = $name;
-    }
-
-    function setEmail(string $email)
-    {
-        $this->email = $email;
+        return $this;
     }
 
 }
