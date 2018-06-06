@@ -7,6 +7,7 @@ use CodeEmailMKT\Application\Form\LoginForm;
 use CodeEmailMKT\Infrastructure\View\HelperPluginManagerFactory;
 use Zend\Form\ConfigProvider;
 use Zend\Stdlib\ArrayUtils;
+use Zend\View\Helper\Service\IdentityFactory;
 use Zend\View\HelperPluginManager;
 
 $forms = [
@@ -23,6 +24,7 @@ $forms = [
         'alias' => [],
         'invokables' => [],
         'factories' => [
+            'identity' => IdentityFactory::class
         ]
     ]
 ];
