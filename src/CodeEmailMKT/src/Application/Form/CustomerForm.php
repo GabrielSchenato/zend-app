@@ -2,6 +2,10 @@
 
 namespace CodeEmailMKT\Application\Form;
 
+use CodeEmailMKT\Domain\Entity\Tag;
+use Doctrine\Common\Persistence\ObjectManager;
+use DoctrineModule\Form\Element\ObjectSelect;
+use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use Zend\Form\Element\Button;
 use Zend\Form\Element\Hidden;
 use Zend\Form\Element\Text;
@@ -18,20 +22,25 @@ use Zend\Form\Form;
  *
  * @author gabriel
  */
-class CustomerForm extends Form
-{
+class CustomerForm extends Form implements ObjectManagerAwareInterface {
+
+    private $objectManager;
+
     public function __construct($name = 'customer', $options = array())
     {
         parent::__construct($name, $options);
+    }
 
-        
+    public function init()
+    {
+
         $this->add([
-           'name' => 'id',
+            'name' => 'id',
             'type' => Hidden::class
         ]);
-        
+
         $this->add([
-           'name' => 'name',
+            'name' => 'name',
             'type' => Text::class,
             'options' => [
                 'label' => 'Nome'
@@ -40,9 +49,9 @@ class CustomerForm extends Form
                 'id' => 'name'
             ]
         ]);
-        
+
         $this->add([
-           'name' => 'email',
+            'name' => 'email',
             'type' => Text::class,
             'options' => [
                 'label' => 'E-mail'
@@ -52,14 +61,37 @@ class CustomerForm extends Form
                 'type' => 'email'
             ]
         ]);
-        
+
         $this->add([
-           'name' => 'submit',
+            'name' => 'tags',
+            'type' => ObjectSelect::class,
+            'attributes' => [
+                'multiple' => 'multiple'
+            ],
+            'options' => [
+                'object_manager' => $this->getObjectManager(),
+                'target_class' => Tag::class,
+                'property' => 'name'
+            ]
+        ]);
+
+        $this->add([
+            'name' => 'submit',
             'type' => Button::class,
             'attributes' => [
                 'type' => 'submit'
             ]
         ]);
-        
     }
+
+    public function getObjectManager(): ObjectManager
+    {
+        return $this->objectManager;
+    }
+
+    public function setObjectManager(ObjectManager $objectManager)
+    {
+        $this->objectManager = $objectManager;
+    }
+
 }
