@@ -2,6 +2,7 @@
 
 namespace CodeEmailMKT\Infrastructure\Service\Factory;
 
+use CodeEmailMKT\Infrastructure\Service\CampaignEmailSender;
 use Interop\Container\ContainerInterface;
 
 /*
@@ -17,9 +18,12 @@ use Interop\Container\ContainerInterface;
  */
 class CampaignEmailSenderFactory {
 
-    public function __invoke(ContainerInterface $container): CampaignEmailSenderFactory
+    public function __invoke(ContainerInterface $container): CampaignEmailSender
     {
-        return new CampaignEmailSender();
+        $template = $container->get(\Zend\Expressive\Template\TemplateRendererInterface::class);
+        $mailGun = $container->get(\Mailgun\Mailgun::class);
+        $mailGunConfig = $container->get('config')['mailgun'];
+        return new CampaignEmailSender($template, $mailGun, $mailGunConfig);
     }
 
 }

@@ -30,13 +30,15 @@ use \CodeEmailMKT\Application\Action\Campaign\{
     CampaignCreatePageAction,
     CampaignDeletePageAction,
     CampaignListPageAction,
-    CampaignUpdatePageAction
+    CampaignUpdatePageAction,
+    CampaignSenderPageAction
 };
 use \CodeEmailMKT\Application\Action\Campaign\Factory\{
     CampaignCreatePageFactory,
     CampaignDeletePageFactory,
     CampaignListPageFactory,
-    CampaignUpdatePageFactory
+    CampaignUpdatePageFactory,
+    CampaignSenderPageFactory
 };
 use CodeEmailMKT\Application\Action\{
     LoginPageAction,
@@ -93,6 +95,7 @@ class ConfigProvider
                 CampaignCreatePageAction::class => CampaignCreatePageFactory::class,
                 CampaignUpdatePageAction::class => CampaignUpdatePageFactory::class,
                 CampaignDeletePageAction::class => CampaignDeletePageFactory::class,
+                CampaignSenderPageAction::class => CampaignSenderPageFactory::class,
             ],
         ];
     }

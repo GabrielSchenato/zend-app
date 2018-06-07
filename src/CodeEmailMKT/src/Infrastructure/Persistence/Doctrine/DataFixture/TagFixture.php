@@ -49,7 +49,10 @@ class TagFixture extends AbstractFixture implements FixtureInterface, OrderedFix
         $indexesCampaigns = array_rand(range(0, 19), rand (2, 5));
         foreach ($indexesCampaigns as $value){
             $campaign = $this->getReference("campaign-$value");
-            $tag->getCampaigns()->add($campaign);
+            if($campaign->getTags()->count() < 2){
+                $campaign->getTags()->add($tag);
+                $tag->getCampaigns()->add($campaign);
+            }
         }
     }
 
