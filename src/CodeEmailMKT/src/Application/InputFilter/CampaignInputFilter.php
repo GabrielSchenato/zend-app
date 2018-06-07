@@ -43,6 +43,46 @@ class CampaignInputFilter extends InputFilter {
         ]);
         
         $this->add([
+            'name' => 'subject',
+            'required' => true,
+            'filters' => [
+                ['name' => StringTrim::class],
+                ['name' => StripTags::class]
+            ],
+            'validators' => [
+                [
+                    'name' => NotEmpty::class,
+                    'break_chain_on_failure' => true,
+                    'options' => [
+                        'messages' => [
+                            NotEmpty::IS_EMPTY => "Este campo é requerido"
+                        ]
+                    ]
+                ],
+            ]
+        ]);
+        
+        $this->add([
+            'name' => 'tags',
+            'required' => true,
+            'filters' => [
+                ['name' => StringTrim::class],
+                ['name' => StripTags::class]
+            ],
+            'validators' => [
+                [
+                    'name' => NotEmpty::class,
+                    'break_chain_on_failure' => true,
+                    'options' => [
+                        'messages' => [
+                            NotEmpty::IS_EMPTY => "Este campo é requerido"
+                        ]
+                    ]
+                ],
+            ]
+        ]);
+        
+        $this->add([
             'name' => 'template',
             'required' => true,
             'validators' => [

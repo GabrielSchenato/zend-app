@@ -29,6 +29,7 @@ class CampaignFixture extends AbstractFixture implements FixtureInterface, Order
         foreach (range(1, 100) as $key => $value) {
             $campaign = new Campaign();
             $campaign->setName($faker->country);
+            $campaign->setSubject($faker->sentence(3));
             $campaign->setTemplate("");
             $manager->persist($campaign);
             $this->addReference("campaign-$key", $campaign);

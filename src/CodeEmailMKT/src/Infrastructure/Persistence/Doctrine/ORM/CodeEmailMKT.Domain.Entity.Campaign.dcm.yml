@@ -12,6 +12,8 @@ CodeEmailMKT\Domain\Entity\Campaign:
     fields:
         name:
             type: string(200)
+        subject:
+            type: string(200)
         template:
             type: text
     manyToMany:

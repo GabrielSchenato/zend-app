@@ -10,13 +10,15 @@
                     <tbody>
                         <tr>
                             <th style="width: 10px;">#</th>
-                            <th>Nome</th>
+                            <th style="width: 20%;">Nome</th>
+                            <th>Assunto</th>
                             <th>Ações</th>
                         </tr>
                         {% for campaign in campaigns %}
                             <tr>
                                 <td>{{ campaign.id }}</td>
                                 <td>{{ campaign.name }}</td>
+                                <td>{{ campaign.subject | slice(0, 40)}}...</td>
                                 <td><a href="{{ url('campaign.update', {id: campaign.id}) }}">Editar</a> |
                                 <a href="{{ url('campaign.delete', {id: campaign.id}) }}">Excluir</a></td>
                             </tr>

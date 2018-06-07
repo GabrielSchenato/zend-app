@@ -21,6 +21,7 @@ class Campaign {
 
     private $id;
     private $name;
+    private $subject;
     private $template;
     private $tags;
 
@@ -66,7 +67,19 @@ class Campaign {
         $this->template = $template;
         return $this;
     }
+    
+    function getSubject()
+    {
+        return $this->subject;
+    }
 
+    function setSubject($subject)
+    {
+        $this->subject = $subject;
+        return $this;
+    }
+
+    
     public function addTags(Collection $tags)
     {
         /** @var Tag $tag */
