@@ -26,6 +26,18 @@ use \CodeEmailMKT\Application\Action\Tag\Factory\{
     TagListPageFactory,
     TagUpdatePageFactory
 };
+use \CodeEmailMKT\Application\Action\Campaign\{
+    CampaignCreatePageAction,
+    CampaignDeletePageAction,
+    CampaignListPageAction,
+    CampaignUpdatePageAction
+};
+use \CodeEmailMKT\Application\Action\Campaign\Factory\{
+    CampaignCreatePageFactory,
+    CampaignDeletePageFactory,
+    CampaignListPageFactory,
+    CampaignUpdatePageFactory
+};
 use CodeEmailMKT\Application\Action\{
     LoginPageAction,
     LoginPageFactory,
@@ -77,6 +89,10 @@ class ConfigProvider
                 TagCreatePageAction::class => TagCreatePageFactory::class,
                 TagUpdatePageAction::class => TagUpdatePageFactory::class,
                 TagDeletePageAction::class => TagDeletePageFactory::class,
+                CampaignListPageAction::class => CampaignListPageFactory::class,
+                CampaignCreatePageAction::class => CampaignCreatePageFactory::class,
+                CampaignUpdatePageAction::class => CampaignUpdatePageFactory::class,
+                CampaignDeletePageAction::class => CampaignDeletePageFactory::class,
             ],
         ];
     }

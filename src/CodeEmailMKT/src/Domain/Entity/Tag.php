@@ -22,10 +22,12 @@ class Tag {
     private $id;
     private $name;
     private $customers;
+    private $campaigns;
 
     public function __construct()
     {
         $this->customers = new ArrayCollection();
+        $this->campaigns = new ArrayCollection();
     }
 
     function getId()
@@ -49,9 +51,15 @@ class Tag {
         $this->name = $name;
         return $this;
     }
+    
     function getCustomers(): Collection
     {
         return $this->customers;
+    }
+    
+    function getCampaigns(): Collection
+    {
+        return $this->campaigns;
     }
 
 

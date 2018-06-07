@@ -9,6 +9,7 @@ use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use Zend\Form\Element\Button;
 use Zend\Form\Element\Hidden;
 use Zend\Form\Element\Text;
+use Zend\Form\Element\Textarea;
 use Zend\Form\Form;
 
 /*
@@ -18,15 +19,15 @@ use Zend\Form\Form;
  */
 
 /**
- * Description of CustomerForm
+ * Description of CampaignForm
  *
  * @author gabriel
  */
-class CustomerForm extends Form implements ObjectManagerAwareInterface {
+class CampaignForm extends Form implements ObjectManagerAwareInterface {
 
     private $objectManager;
 
-    public function __construct($name = 'customer', $options = array())
+    public function __construct($name = 'campaing', $options = array())
     {
         parent::__construct($name, $options);
     }
@@ -51,18 +52,6 @@ class CustomerForm extends Form implements ObjectManagerAwareInterface {
         ]);
 
         $this->add([
-            'name' => 'email',
-            'type' => Text::class,
-            'options' => [
-                'label' => 'E-mail'
-            ],
-            'attributes' => [
-                'id' => 'email',
-                'type' => 'email'
-            ]
-        ]);
-
-        $this->add([
             'name' => 'tags',
             'type' => ObjectSelect::class,
             'attributes' => [
@@ -73,6 +62,17 @@ class CustomerForm extends Form implements ObjectManagerAwareInterface {
                 'target_class' => Tag::class,
                 'property' => 'name',
                 'label' => 'Tags'
+            ]
+        ]);
+        
+        $this->add([
+            'name' => 'template',
+            'type' => Textarea::class,
+            'options' => [
+                'label' => 'Template'
+            ],
+            'attributes' => [
+                'id' => 'template'
             ]
         ]);
 

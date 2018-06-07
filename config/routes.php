@@ -6,6 +6,9 @@ use CodeEmailMKT\Application\Action\Customer\{
 use CodeEmailMKT\Application\Action\Tag\{
     TagCreatePageAction, TagDeletePageAction, TagListPageAction, TagUpdatePageAction    
 };
+use CodeEmailMKT\Application\Action\Campaign\{
+    CampaignCreatePageAction, CampaignDeletePageAction, CampaignListPageAction, CampaignUpdatePageAction    
+};
 use CodeEmailMKT\Application\Action\{
     LoginPageAction, LogoutAction    
 };
@@ -58,5 +61,14 @@ $app->route('/admin/tag/update/{id}', TagUpdatePageAction::class, ['GET', 'PUT',
         'tokens' => ['id' => '\d+'],
     ]);
 $app->route('/admin/tag/delete/{id}', TagDeletePageAction::class, ['GET', 'DELETE',], 'tag.delete')->setOptions([
+        'tokens' => ['id' => '\d+'],
+    ]);
+
+$app->get('/admin/campaigns', CampaignListPageAction::class, 'list.campaigns');
+$app->route('/admin/campaign/create', CampaignCreatePageAction::class, ['GET', 'POST',], 'campaign.create');
+$app->route('/admin/campaign/update/{id}', CampaignUpdatePageAction::class, ['GET', 'PUT',], 'campaign.update')->setOptions([
+        'tokens' => ['id' => '\d+'],
+    ]);
+$app->route('/admin/campaign/delete/{id}', CampaignDeletePageAction::class, ['GET', 'DELETE',], 'campaign.delete')->setOptions([
         'tokens' => ['id' => '\d+'],
     ]);

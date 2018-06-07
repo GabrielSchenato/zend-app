@@ -14,11 +14,11 @@ use Zend\Validator\NotEmpty;
  */
 
 /**
- * Description of TagInputFilter
+ * Description of CampaignInputFilter
  *
  * @author gabriel
  */
-class TagInputFilter extends InputFilter {
+class CampaignInputFilter extends InputFilter {
 
     public function __construct()
     {
@@ -29,6 +29,22 @@ class TagInputFilter extends InputFilter {
                 ['name' => StringTrim::class],
                 ['name' => StripTags::class]
             ],
+            'validators' => [
+                [
+                    'name' => NotEmpty::class,
+                    'break_chain_on_failure' => true,
+                    'options' => [
+                        'messages' => [
+                            NotEmpty::IS_EMPTY => "Este campo é requerido"
+                        ]
+                    ]
+                ],
+            ]
+        ]);
+        
+        $this->add([
+            'name' => 'template',
+            'required' => true,
             'validators' => [
                 [
                     'name' => NotEmpty::class,
