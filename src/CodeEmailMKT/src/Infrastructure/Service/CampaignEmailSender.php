@@ -60,6 +60,7 @@ class CampaignEmailSender implements CampaignEmailServiceInterface {
 
     public function send()
     {
+        //$this->createCampaign();
         $batchMessage = $this->getBatchMessage();
 
         $tags = $this->campaign->getTags()->toArray();
@@ -99,5 +100,17 @@ class CampaignEmailSender implements CampaignEmailServiceInterface {
         $this->campaign = $campaign;
         return $this;
     }
+    
+//    protected function createCampaign(){
+//        $domain = $this->mailGunConfig['domain'];
+//        try{
+//            $this->mailGun->get("$domain/campaigns/campaign_{$this->campaign->getId()}");
+//        } catch (\Mailgun\Connection\Exceptions\MissingEndpoint $ex) {
+//            $this->mailGun->post("$domain/campaigns", [
+//                'id' => "campaign_{$this->campaign->getId()}",
+//                'name' => $this->campaign->getName()
+//            ]);
+//        }
+//    }
 
 }
