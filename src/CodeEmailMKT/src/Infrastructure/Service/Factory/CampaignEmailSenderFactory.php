@@ -2,8 +2,11 @@
 
 namespace CodeEmailMKT\Infrastructure\Service\Factory;
 
+use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
 use CodeEmailMKT\Infrastructure\Service\CampaignEmailSender;
 use Interop\Container\ContainerInterface;
+use Mailgun\Mailgun;
+use Zend\Expressive\Template\TemplateRendererInterface;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,10 +23,11 @@ class CampaignEmailSenderFactory {
 
     public function __invoke(ContainerInterface $container): CampaignEmailSender
     {
-        $template = $container->get(\Zend\Expressive\Template\TemplateRendererInterface::class);
-        $mailGun = $container->get(\Mailgun\Mailgun::class);
+        $template = $container->get(TemplateRendererInterface::class);
+        $mailGun = $container->get(Mailgun::class);
         $mailGunConfig = $container->get('config')['mailgun'];
-        return new CampaignEmailSender($template, $mailGun, $mailGunConfig);
+        $repository = $container->get(CustomerRepositoryInterface::class);
+        return new CampaignEmailSender($template, $mailGun, $mailGunConfig, $repository);
     }
 
 }

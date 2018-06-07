@@ -5,6 +5,7 @@ declare (strict_types = 1);
 namespace CodeEmailMKT\Infrastructure\Service;
 
 use CodeEmailMKT\Domain\Entity\Campaign;
+use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
 use CodeEmailMKT\Domain\Service\CampaignEmailServiceInterface;
 use Mailgun\Mailgun;
 use Mailgun\Messages\BatchMessage;
@@ -22,6 +23,11 @@ use Zend\Expressive\Template\TemplateRendererInterface;
  * @author gabriel
  */
 class CampaignEmailSender implements CampaignEmailServiceInterface {
+
+    /**
+     * @var CustomerRepositoryInterface
+     */
+    private $repository;
 
     /**
      * @var array
@@ -43,26 +49,30 @@ class CampaignEmailSender implements CampaignEmailServiceInterface {
      */
     private $templateRenderer;
 
-    public function __construct(TemplateRendererInterface $templateRenderer, Mailgun $mailGun, array $mailGunConfig)
+    public function __construct(TemplateRendererInterface $templateRenderer, Mailgun $mailGun, array $mailGunConfig, CustomerRepositoryInterface $repository)
     {
 
         $this->templateRenderer = $templateRenderer;
         $this->mailGun = $mailGun;
         $this->mailGunConfig = $mailGunConfig;
+        $this->repository = $repository;
     }
 
     public function send()
     {
-        $tags = $this->campaign->getTags()->toArray();
         $batchMessage = $this->getBatchMessage();
+
+        $tags = $this->campaign->getTags()->toArray();
         foreach ($tags as $tag) {
             $batchMessage->addTag($tag->getName());
-            $customers = $tag->getCustomers()->toArray();
-            foreach ($customers as $customer) {
-                $name = (!$customer->getName() or $customer->getName() == '') ? $customer->getEmail() : $customer->getName();
-                $batchMessage->addToRecipient($customer->getEmail(), ['full_name' => $name]);
-            }
         }
+
+        $customers = $this->repository->findByTags($tags);
+        foreach ($customers as $customer) {
+            $name = (!$customer->getName() or $customer->getName() == '') ? $customer->getEmail() : $customer->getName();
+            $batchMessage->addToRecipient($customer->getEmail(), ['full_name' => $name]);
+        }
+
         $batchMessage->finalize();
     }
 

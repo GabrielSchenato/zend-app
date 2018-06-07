@@ -3,6 +3,7 @@
 namespace CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository;
 
 use CodeEmailMKT\Domain\Entity\Customer;
+use CodeEmailMKT\Domain\Entity\Tag;
 use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\UnitOfWork;
@@ -51,6 +52,16 @@ class CustomerRepository extends EntityRepository implements CustomerRepositoryI
     public function findAll(): array
     {
         return parent::findAll();
+    }
+
+    public function findByTags(array $tags): array
+    {
+        $qb = $this->createQueryBuilder('c')
+                ->distinct()
+                ->leftJoin(Tag::class, 't')
+                ->andWhere('t.id IN (:tag_ids)')
+                ->setParameter('tag_ids', $tags);
+        return $qb->getQuery()->getResult();
     }
 
 }

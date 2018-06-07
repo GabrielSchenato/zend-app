@@ -13,5 +13,5 @@ namespace CodeEmailMKT\Domain\Persistence;
  * @author gabriel
  */
 interface CustomerRepositoryInterface extends RepositoryInterface {
-    
+    public function findByTags(array $tags): array;
 }
