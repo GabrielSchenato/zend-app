@@ -24,18 +24,28 @@ class CustomerFixture extends AbstractFixture implements FixtureInterface, Order
 
     public function load(ObjectManager $manager)
     {
-        $faker = Faker\Factory::create();
+        //$faker = Faker\Factory::create();
 
-        foreach (range(1, 100) as $key => $value) {
+        foreach ($this->getData() as $key => $value) {
             $customer = new Customer();
-            $customer->setName($faker->firstName . ' ' . $faker->lastName);
-            $customer->setEmail($faker->email);
+            $customer->setName($value['name']);
+            $customer->setEmail($value['email']);
 
             $manager->persist($customer);
             $this->addReference("customer-$key", $customer);
         }
 
         $manager->flush();
+    }
+    
+    public function getData(){
+        return [
+            ['name' => 'Gabriel 1', 'email' => 'gabriel.schenato@inovadora.com.br'],
+            ['name' => 'Gabriel 2', 'email' => 'gabriel@uniplaclages.edu.br'],
+            ['name' => 'Gabriel 3', 'email' => 'gabriel.schenato@inovadora.com.br'],
+            ['name' => 'Gabriel 4', 'email' => 'gabriel@uniplaclages.edu.br'],
+            ['name' => 'Gabriel 5', 'email' => 'gabriel.schenato@inovadora.com.br']
+        ];
     }
 
     public function getOrder()

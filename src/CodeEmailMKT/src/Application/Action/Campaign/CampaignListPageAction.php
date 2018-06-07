@@ -4,6 +4,7 @@ namespace CodeEmailMKT\Application\Action\Campaign;
 
 use CodeEmailMKT\Domain\Persistence\CampaignRepositoryInterface;
 use CodeEmailMKT\Domain\Service\FlashMessageInterface;
+use Mailgun\Mailgun;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -14,7 +15,7 @@ class CampaignListPageAction {
     private $template;
     private $repository;
 
-    public function __construct(CampaignRepositoryInterface $repository, Template\TemplateRendererInterface $template)
+    public function __construct(CampaignRepositoryInterface $repository, Template\TemplateRendererInterface $template, Mailgun $mailGun)
     {
         $this->template = $template;
         $this->repository = $repository;

@@ -25,12 +25,12 @@ class CampaignFixture extends AbstractFixture implements FixtureInterface, Order
     public function load(ObjectManager $manager)
     {
         $faker = Faker\Factory::create();
-        
-        foreach (range(1, 100) as $key => $value) {
+        $template = "<p>{$faker->paragraph(2)}<a href='https://www.google.com'>Comprar Produto</a></p>";
+        foreach (range(1, 20) as $key => $value) {
             $campaign = new Campaign();
             $campaign->setName($faker->country);
             $campaign->setSubject($faker->sentence(3));
-            $campaign->setTemplate("");
+            $campaign->setTemplate($template);
             $manager->persist($campaign);
             $this->addReference("campaign-$key", $campaign);
         }

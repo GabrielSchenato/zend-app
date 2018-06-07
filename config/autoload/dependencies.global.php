@@ -9,8 +9,8 @@ use CodeEmailMKT\Application\Middleware\{
   TwigMiddleware,
   TwigMiddlewareFactory  
 };
-use CodeEmailMKT\Domain\Service\{AuthInterface, FlashMessageInterface};
-use CodeEmailMKT\Infrastructure\Service\Factory\{AuthServiceFactory, FlashMessageFactory};
+use CodeEmailMKT\Domain\Service\{AuthInterface, FlashMessageInterface, CampaignEmailServiceInterface};
+use CodeEmailMKT\Infrastructure\Service\Factory\{AuthServiceFactory, FlashMessageFactory, MailgunFactory, CampaignEmailSenderFactory};
 use CodeEmailMKT\Domain\Persistence\{
     CustomerRepositoryInterface, TagRepositoryInterface, CampaignRepositoryInterface
 };
@@ -67,6 +67,8 @@ return [
             AuthenticationMiddleware::class => AuthenticationMiddlewareFactory::class,
             TwigMiddleware::class => TwigMiddlewareFactory::class,
             AuthInterface::class => AuthServiceFactory::class,
+            Mailgun\Mailgun::class => MailgunFactory::class,
+            CampaignEmailServiceInterface::class => CampaignEmailSenderFactory::class
         ],
     ],
 ];
