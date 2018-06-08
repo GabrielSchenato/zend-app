@@ -19,20 +19,6 @@ use CodeEmailMKT\Domain\Persistence\TagRepositoryInterface;
 class TagRepository extends AbstractRepository implements TagRepositoryInterface {
 
     use QueryBuilderTrait;
-
-    public function add(CriteriaInterface $criteria)
-    {
-        
-    }
-
-    public function findWithCriteria()
-    {
-        
-    }
-
-    public function set(array $criterias)
-    {
-        
-    }
+    use RepositoryCriteriaTrait;
 
 }
