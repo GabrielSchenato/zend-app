@@ -101,16 +101,35 @@ class CampaignEmailSender implements CampaignEmailServiceInterface {
         return $this;
     }
     
-//    protected function createCampaign(){
-//        $domain = $this->mailGunConfig['domain'];
-//        try{
-//            $this->mailGun->get("$domain/campaigns/campaign_{$this->campaign->getId()}");
-//        } catch (\Mailgun\Connection\Exceptions\MissingEndpoint $ex) {
-//            $this->mailGun->post("$domain/campaigns", [
-//                'id' => "campaign_{$this->campaign->getId()}",
-//                'name' => $this->campaign->getName()
-//            ]);
-//        }
-//    }
+    public function render() : ResponseInterface
+    {
+        return new HtmlResponse($this->templateRenderer->render('app::campaign/report', [
+            'campaign_data' => $this->getCampaignData(),
+            'campaign' => $this->campaign,
+            'customers_count' => $this->getCountCustomers(),
+            'opened_distinct_count' => $this->getCountOpenedDistinct()
+        ]));
+    }
+    protected function getCampaignData()
+    {
+        $domain = $this->mailGunConfig['domain'];
+        $response = $this->mailgun->get("$domain/campaigns/campaign_{$this->campaign->getId()}");
+        return $response->http_response_body;
+    }
+    public function getCountOpenedDistinct()
+    {
+        $domain = $this->mailGunConfig['domain'];
+        $response = $this->mailgun->get("$domain/campaigns/campaign_{$this->campaign->getId()}/opens", [
+            'groupby' => 'recipient',
+            'count' => true
+        ]);
+        return $response->http_response_body->count;
+    }
+    protected function getCountCustomers()
+    {
+        $tags = $this->campaign->getTags()->toArray();
+        $customers = $this->repository->findByTags($tags);
+        return count($customers);
+    }
 
 }

@@ -7,7 +7,7 @@ use CodeEmailMKT\Application\Action\Tag\{
     TagCreatePageAction, TagDeletePageAction, TagListPageAction, TagUpdatePageAction    
 };
 use CodeEmailMKT\Application\Action\Campaign\{
-    CampaignCreatePageAction, CampaignDeletePageAction, CampaignListPageAction, CampaignUpdatePageAction, CampaignSenderPageAction    
+    CampaignCreatePageAction, CampaignDeletePageAction, CampaignListPageAction, CampaignUpdatePageAction, CampaignSenderPageAction, CampaignReportPageAction    
 };
 use CodeEmailMKT\Application\Action\{
     LoginPageAction, LogoutAction    
@@ -73,5 +73,8 @@ $app->route('/admin/campaign/delete/{id}', CampaignDeletePageAction::class, ['GE
         'tokens' => ['id' => '\d+'],
     ]);
 $app->route('/admin/campaign/sender/{id}', CampaignSenderPageAction::class, ['GET', 'POST',], 'campaign.sender')->setOptions([
+        'tokens' => ['id' => '\d+'],
+    ]);
+$app->route('/admin/campaign/report/{id}', CampaignReportPageAction::class, ['GET'], 'campaign.report')->setOptions([
         'tokens' => ['id' => '\d+'],
     ]);
