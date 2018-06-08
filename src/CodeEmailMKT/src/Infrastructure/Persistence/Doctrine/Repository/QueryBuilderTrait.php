@@ -8,8 +8,6 @@
 
 namespace CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository;
 
-use Doctrine\ORM\QueryBuilder;
-
 /**
  * Description of QueryBuilderTrait
  *
@@ -18,12 +16,12 @@ use Doctrine\ORM\QueryBuilder;
 trait QueryBuilderTrait {
     protected $queryBuilder;
     
-    public function getQueryBuilder(): QueryBuilder
+    public function getQueryBuilder()
     {
         return $this->queryBuilder;
     }
     
-    public function setQueryBuilder(QueryBuilder $queryBuilder)
+    public function setQueryBuilder($queryBuilder)
     {
         $this->queryBuilder = $queryBuilder;
     }

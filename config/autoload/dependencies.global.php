@@ -14,6 +14,12 @@ use CodeEmailMKT\Infrastructure\Service\Factory\{AuthServiceFactory, FlashMessag
 use CodeEmailMKT\Domain\Persistence\{
     CustomerRepositoryInterface, TagRepositoryInterface, CampaignRepositoryInterface
 };
+use CodeEmailMKT\Domain\Persistence\Criteria\{
+    FindByNameCriteriaInterface, FindByIdCriteriaInterface    
+};
+use CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository\Criteria\{
+    FindByNameCriteria, FindByIdCriteria    
+};
 use CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository\{
     CustomerRepositoryFactory, TagRepositoryFactory, CampaignRepositoryFactory
 };
@@ -46,6 +52,8 @@ return [
         'invokables' => [
             // Fully\Qualified\InterfaceName::class => Fully\Qualified\ClassName::class,
             Helper\ServerUrlHelper::class => Helper\ServerUrlHelper::class,
+            FindByNameCriteriaInterface::class => FindByNameCriteria::class,
+            FindByIdCriteriaInterface::class => FindByIdCriteria::class
         ],
         // Use 'factories' for services provided by callbacks/factory classes.
         'factories'  => [

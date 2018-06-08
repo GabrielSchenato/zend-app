@@ -18,7 +18,7 @@ use CodeEmailMKT\Domain\Persistence\CriteriaInterface;
 trait RepositoryCriteriaTrait {
 
     protected $criterias = [];
-    public $ALIAS_ENTITY;
+    public $ALIAS_ENTITY = "entity";
 
     public function add(CriteriaInterface $criteria)
     {
