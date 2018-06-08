@@ -2,6 +2,7 @@
 
 namespace CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository;
 
+use CodeEmailMKT\Domain\Persistence\CriteriaInterface;
 use CodeEmailMKT\Domain\Persistence\TagRepositoryInterface;
 
 /*
@@ -16,5 +17,22 @@ use CodeEmailMKT\Domain\Persistence\TagRepositoryInterface;
  * @author gabriel
  */
 class TagRepository extends AbstractRepository implements TagRepositoryInterface {
-    
+
+    use QueryBuilderTrait;
+
+    public function add(CriteriaInterface $criteria)
+    {
+        
+    }
+
+    public function findWithCriteria()
+    {
+        
+    }
+
+    public function set(array $criterias)
+    {
+        
+    }
+
 }

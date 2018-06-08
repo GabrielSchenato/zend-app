@@ -12,6 +12,6 @@ namespace CodeEmailMKT\Domain\Persistence;
  *
  * @author gabriel
  */
-interface TagRepositoryInterface extends RepositoryInterface {
+interface TagRepositoryInterface extends RepositoryInterface, RepositoryCriteriaInterface {
     
 }
