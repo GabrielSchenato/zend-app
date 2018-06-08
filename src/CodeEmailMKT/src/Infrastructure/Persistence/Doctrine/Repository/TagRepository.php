@@ -2,7 +2,6 @@
 
 namespace CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository;
 
-use CodeEmailMKT\Domain\Persistence\CriteriaInterface;
 use CodeEmailMKT\Domain\Persistence\TagRepositoryInterface;
 
 /*
