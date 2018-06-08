@@ -44,16 +44,6 @@ class CustomerRepository extends EntityRepository implements CustomerRepositoryI
         return $entity;
     }
 
-    public function find($id): Customer
-    {
-        return parent::find($id);
-    }
-
-    public function findAll(): array
-    {
-        return parent::findAll();
-    }
-
     public function findByTags(array $tags): array
     {
         $qb = $this->createQueryBuilder('c')

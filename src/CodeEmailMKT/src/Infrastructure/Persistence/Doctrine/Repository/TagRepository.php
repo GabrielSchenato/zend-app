@@ -42,15 +42,4 @@ class TagRepository extends EntityRepository implements TagRepositoryInterface {
         $this->getEntityManager()->flush();
         return $entity;
     }
-
-    public function find($id): Tag
-    {
-        return parent::find($id);
-    }
-
-    public function findAll(): array
-    {
-        return parent::findAll();
-    }
-
 }

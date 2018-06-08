@@ -43,14 +43,4 @@ class CampaignRepository extends EntityRepository implements CampaignRepositoryI
         return $entity;
     }
 
-    public function find($id): Campaign
-    {
-        return parent::find($id);
-    }
-
-    public function findAll(): array
-    {
-        return parent::findAll();
-    }
-
 }
